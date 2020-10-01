@@ -29,7 +29,7 @@ function App() {
   let resetButton = document.getElementsByClassName('button')[0];
   const allResValues = [resId, resName, resYear, resColor, resValue];
 
-  const [tableItems, setTableItems] = useState([]); // контент всех ячеек выносим в state
+  const [tableItems, setTableItems] = useState([]); // Move the content of all cells into state
 
   const toggleIdRes = () => {
     setIdRes(resId => !resId);
@@ -56,7 +56,7 @@ function App() {
     (async () => {
       let response = await fetch('https://reqres.in/api/unknown?per_page=12');
       let content = await response.json();
-      setTableItems([...tableItems, ...content.data]); // когда получили ответ из запроса, записываем его в state
+      setTableItems([...tableItems, ...content.data]); // When received a response from the request, write it to state
     })();
   }, []);
 
@@ -89,8 +89,8 @@ function App() {
             {resValue && <th><input type="checkbox" onChange={toggleValueRes} defaultChecked />Pantone value </th>}
           </tr>
           {
-            !!tableItems.length && // проверяем есть ли хоть что-то в tableItems
-            tableItems.map(item => ( // если есть, то перебираем весь массив и отрисовываем каждую ячейку. но лучше какждую ячейку вынести как отдельный компонент
+            !!tableItems.length && // Check if there is at least something in tableItems
+            tableItems.map(item => ( // If there is, then iterate over the entire array and draw each cell
               <TableItem
                 key={item.id}
                 id={item.id}
